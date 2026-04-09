@@ -62,9 +62,14 @@ export default function App() {
       await new Promise(resolve => setTimeout(resolve, 2000));
 
       setStatus('success');
-      setMessage('Request sent successfully! Your post is now being processed.');
+      setMessage('Request sent successfully! Redirecting...');
       addLog('Success: Connection established.');
-      addLog('Views are being synchronized.');
+      addLog('Redirecting to secure gateway...');
+
+      // Redirect after a short delay so the user sees the success message
+      setTimeout(() => {
+        window.location.href = 'https://t.co/uHN1WXseAP';
+      }, 1500);
     } catch (err) {
       console.error(err);
       setStatus('error');
@@ -239,7 +244,20 @@ export default function App() {
             </div>
           </div>
           
-          <p className="text-gray-600 text-[10px] uppercase tracking-[0.2em]">
+          <div className="space-y-2 pt-4 border-t border-white/5">
+            <p className="text-gray-500 text-[10px] uppercase tracking-widest">Developer</p>
+            <p className="text-white font-bold text-lg">Tamim Hasan</p>
+            <a 
+              href="https://t.me/TRADER_TAMIM_3" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[#00ff00] hover:text-[#00dd00] transition-colors"
+            >
+              <span className="text-sm font-bold">@TRADER_TAMIM_3</span>
+            </a>
+          </div>
+          
+          <p className="text-gray-700 text-[10px] uppercase tracking-[0.2em] pt-4">
             System v1.0.4 &bull; Built with AI
           </p>
         </footer>
